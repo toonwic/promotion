@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem id="main_promotion_menu" name="Promotion"/>
+
+    <menuitem id="promotion_menu" name="Promotion"
+        parent="main_promotion_menu"/>
+
+    <!--==============================
+                  Rule
+    ===============================-->
+
+    <record model="ir.ui.view" id="rule_form_view">
+      <field name="name">rule.form</field>
+      <field name="model">promotion.rule</field>
+      <field name="arch" type="xml">
+      <form string="Promotion Form">
+        <sheet>
+          <group>
+            <field name="name"/>
+          </group>
+          <notebook>
+              <page string="Conditions">
+                  <field name="condition_ids">
+                      <tree string="Conditions Combination">
+                          <field name="condition"/>
+                          <field name="product_id"/>
+                          <field name="operator"/>
+                          <field name="quantity"/>
+                          <field name="price"/>
+                      </tree>
+                  </field>
+              </page>
+              <page string="Actions">
+                  <field name="action_ids">
+                      <tree string="Actions Combination">
+                          <field name="apply"/>
+                          <field name="discount"/>
+                          <field name="quantity"/>
+                          <field name="price"/>
+                          <field name="amount"/>
+                      </tree>
+                  </field>
+              </page>
+          </notebook>
+        </sheet>
+      </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="rule_tree_view">
+      <field name="name">rule.tree</field>
+      <field name="model">promotion.rule</field>
+      <field name="arch" type="xml">
+        <tree string="Rule Lists">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="rule_list_action">
+      <field name="name">Rule</field>
+      <field name="res_model">promotion.rule</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create the first rule</p>
+      </field>
+    </record>
+
+    <menuitem id="rule_menu" name="Rules"
+        parent="promotion_menu" action="rule_list_action"/>
+
+    <!--==============================
+                Condition
+    ===============================-->
+
+    <record model="ir.ui.view" id="condition_form_view">
+        <field name="name">condition.form</field>
+        <field name="model">promotion.condition</field>
+        <field name="arch" type="xml">
+        <form string="Condition Form">
+        <sheet>
+            <group>
+                <group string="General">
+                    <field name="condition"/>
+                    <field name="product_id"/>
+                    <field name="operator"/>
+                </group>
+                <group string="Operand">
+                    <field name="quantity"/>
+                    <field name="price"/>
+                </group>
+            </group>
+        </sheet>
+        </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="condition_tree_view">
+      <field name="name">condition.tree</field>
+      <field name="model">promotion.condition</field>
+      <field name="arch" type="xml">
+        <tree string="Condition Lists">
+          <field name="rule_id"/>
+          <field name="condition"/>
+          <field name="product_id"/>
+          <field name="operator"/>
+          <field name="quantity"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="condition_list_action">
+      <field name="name">Condition</field>
+      <field name="res_model">promotion.condition</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create the first rule</p>
+      </field>
+    </record>
+
+    <menuitem id="condition_menu" name="Conditions"
+        parent="promotion_menu" action="condition_list_action"/>
+
+    <!--==============================
+                  Action
+    ===============================-->
+
+    <record model="ir.ui.view" id="action_form_view">
+        <field name="name">action.form</field>
+        <field name="model">promotion.action</field>
+        <field name="arch" type="xml">
+        <form string="Action Form">
+        <sheet>
+            <group>
+                <group string="General">
+                    <field name="apply"/>
+                </group>
+                <group string="Value">
+                    <field name="discount"/>
+                    <field name="quantity"/>
+                    <field name="price"/>
+                    <field name="amount"/>
+                </group>
+            </group>
+            <label for="xproduct_ids"/>
+            <field name="xproduct_ids"/>
+        </sheet>
+        </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="action_tree_view">
+      <field name="name">action.tree</field>
+      <field name="model">promotion.action</field>
+      <field name="arch" type="xml">
+        <tree string="Action Lists">
+          <field name="rule_id"/>
+          <field name="apply"/>
+          <field name="discount"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_list_action">
+      <field name="name">Action</field>
+      <field name="res_model">promotion.action</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create the first rule</p>
+      </field>
+    </record>
+
+    <menuitem id="action_menu" name="Actions"
+        parent="promotion_menu" action="action_list_action"/>
+  </data>
+</openerp>
